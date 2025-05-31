@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlineResult - Find Your University Results Instantly</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind CSS configuration for dark mode
+        tailwind.config = {
+            darkMode: 'class', // Enable dark mode based on the 'dark' class on the html tag
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'], // Define Inter font family
+                    },
+                    colors: {
+                        // Custom color palette for light mode
+                        light: {
+                            'bg-primary': '#f8fafc', // Slate-50
+                            'bg-secondary': '#ffffff', // White
+                            'text-primary': '#1e293b', // Slate-900
+                            'text-secondary': '#475569', // Slate-600
+                            'border': '#e2e8f0', // Slate-200
+                            'accent': '#3b82f6', // Blue-500
+                            'accent-dark': '#2563eb', // Blue-600
+                        },
+                        // Custom color palette for dark mode
+                        dark: {
+                            'bg-primary': '#1a202c', // Darker background
+                            'bg-secondary': '#2d3748', // Even darker background for cards
+                            'text-primary': '#e2e8f0', // Light text
+                            'text-secondary': '#a0aec0', // Lighter text
+                            'border': '#4a5568', // Darker border
+                            'accent': '#60a5fa', // Lighter blue
+                            'accent-dark': '#3b82f6', // Original blue
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.light.bg-primary');
+            border-radius: 10px;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: theme('colors.dark.bg-primary');
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.light.accent');
+            border-radius: 10px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: theme('colors.dark.accent');
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.light.accent-dark');
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.dark.accent-dark');
+        }
+
+        /* Smooth transition for theme changes */
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .bg-light-bg-primary, .bg-light-bg-secondary, .text-light-text-primary, .text-light-text-secondary, .border-light-border, .text-light-accent, .hover\:bg-light-accent-dark {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        .dark .bg-dark-bg-primary, .dark .bg-dark-bg-secondary, .dark .text-dark-text-primary, .dark .text-dark-text-secondary, .dark .border-dark-border, .dark .text-dark-accent, .dark .hover\:bg-dark-accent-dark {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* For the horizontal scrolling university list */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="font-inter antialiased min-h-screen flex flex-col
+             bg-light-bg-primary text-light-text-primary
+             dark:bg-dark-bg-primary dark:text-dark-text-primary">
+
+    <header class="w-full py-4 px-6 md:px-8 lg:px-12
+                   bg-light-bg-secondary shadow-sm
+                   dark:bg-dark-bg-secondary">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-light-accent dark:text-dark-accent">
+                OnlineResult
+            </a>
+            <button id="darkModeToggle"
+                    class="p-2 rounded-full focus:outline-none focus:ring-2
+                           focus:ring-light-accent dark:focus:ring-dark-accent
+                           text-light-text-secondary hover:text-light-text-primary
+                           dark:text-dark-text-secondary dark:hover:text-dark-text-primary
+                           transition-colors duration-300">
+                <svg id="sunIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12H2m15.325-4.675l.707-.707M6.343 17.657l-.707.707M17.657 6.343l.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <svg id="moonIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 md:px-6 lg:px-8 py-8">
+
+        <section class="text-center py-16 md:py-24 lg:py-32
+                        bg-light-bg-primary dark:bg-dark-bg-primary
+                        transition-colors duration-300">
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4
+                           text-light-text-primary dark:text-dark-text-primary">
+                    Find Your Results Instantly
+                </h1>
+                <p class="text-lg md:text-xl text-light-text-secondary dark:text-dark-text-secondary mb-8">
+                    Access university results from across India in one place. Fast, reliable, and secure.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <input type="text" placeholder="Enter Roll Number or University Name..."
+                           class="w-full sm:w-80 p-3 rounded-lg border border-light-border
+                                  focus:outline-none focus:ring-2 focus:ring-light-accent
+                                  bg-light-bg-secondary text-light-text-primary
+                                  dark:bg-dark-bg-secondary dark:text-dark-text-primary
+                                  dark:border-dark-border dark:focus:ring-dark-accent
+                                  shadow-sm">
+                    <button class="px-6 py-3 rounded-lg font-medium
+                                   bg-light-accent text-white
+                                   hover:bg-light-accent-dark
+                                   focus:outline-none focus:ring-2 focus:ring-light-accent
+                                   dark:bg-dark-accent dark:hover:bg-dark-accent-dark
+                                   dark:focus:ring-dark-accent
+                                   shadow-md">
+                        Search Results
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12">
+            <h2 class="text-3xl font-bold text-center mb-8
+                       text-light-text-primary dark:text-dark-text-primary">
+                Top Universities
+            </h2>
+            <div class="flex overflow-x-auto no-scrollbar py-4 px-2 -mx-2">
+                <div class="flex gap-4 md:gap-6 lg:gap-8 min-w-full">
+                    <a href="#" class="flex-none w-48 p-6 rounded-lg shadow-md flex items-center justify-center
+                                       bg-light-bg-secondary border border-light-border
+                                       dark:bg-dark-bg-secondary dark:border-dark-border
+                                       text-light-text-primary dark:text-dark-text-primary
+                                       hover:shadow-lg hover:border-light-accent dark:hover:border-dark-accent
+                                       transition-all duration-300 transform hover:-translate-y-1">
+                        <span class="text-lg font-medium">SNPV Raigarh</span>
+                    </a>
+                    <a href="#" class="flex-none w-48 p-6 rounded-lg shadow-md flex items-center justify-center
+                                       bg-light-bg-secondary border border-light-border
+                                       dark:bg-dark-bg-secondary dark:border-dark-border
+                                       text-light-text-primary dark:text-dark-text-primary
+                                       hover:shadow-lg hover:border-light-accent dark:hover:border-dark-accent
+                                       transition-all duration-300 transform hover:-translate-y-1">
+                        <span class="text-lg font-medium">ABVV Bilaspur</span>
+                    </a>
+                    <a href="#" class="flex-none w-48 p-6 rounded-lg shadow-md flex items-center justify-center
+                                       bg-light-bg-secondary border border-light-border
+                                       dark:bg-dark-bg-secondary dark:border-dark-border
+                                       text-light-text-primary dark:text-dark-text-primary
+                                       hover:shadow-lg hover:border-light-accent dark:hover:border-dark-accent
+                                       transition-all duration-300 transform hover:-translate-y-1">
+                        <span class="text-lg font-medium">SGGV Sarguja</span>
+                    </a>
+                    </div>
+            </div>
+        </section>
+
+        <section class="py-12">
+            <h2 class="text-3xl font-bold text-center mb-8
+                       text-light-text-primary dark:text-dark-text-primary">
+                Latest Results
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="p-6 rounded-lg shadow-md
+                            bg-light-bg-secondary border border-light-border
+                            dark:bg-dark-bg-secondary dark:border-dark-border">
+                    <h3 class="text-xl font-semibold mb-4 text-light-accent dark:text-dark-accent">
+                        Atal Bihari Vajpayee Vishwavidyalaya, Bilaspur
+                    </h3>
+                    <ul class="space-y-3 text-light-text-secondary dark:text-dark-text-secondary">
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> 2513-PRE PH.D COURSE WORK POLITICAL SCIENCE (DEC.-2024)
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> 2516-PRE PH.D COURSE WORK HISTORY (DEC.-2024)
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> 2520-PRE PH.D COURSE WORK LAW (DEC.-2024)
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> 3501-PRE PH.D COURSE WORK GEOGRAPHY (DEC.-2024)
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> 3511-PRE PH.D COURSE WORK SOCIOLOGY (DEC.-2024)
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">30-Apr-25:</span> 621-MASTER OF COMPUTER APPLICATION (FIRST SEMESTER) (DEC.-2024)
+                        </li>
+                    </ul>
+                    <div class="mt-6 text-right">
+                        <a href="#" class="inline-flex items-center text-light-accent hover:text-light-accent-dark dark:text-dark-accent dark:hover:text-dark-accent-dark font-medium transition-colors duration-200">
+                            View All Results
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-lg shadow-md
+                            bg-light-bg-secondary border border-light-border
+                            dark:bg-dark-bg-secondary dark:border-dark-border">
+                    <h3 class="text-xl font-semibold mb-4 text-light-accent dark:text-dark-accent">
+                        SANT GAHIRA GURU VISHWAVIDYALAYA, SARGUJA
+                    </h3>
+                    <ul class="space-y-3 text-light-text-secondary dark:text-dark-text-secondary">
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">15-May-25:</span> 077-BACHELOR OF PHYSICAL EDUCATION 4YDC PART-THREE (MAR.-APR.-2025)
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">15-May-25:</span> 112-B.B.A PART TWO (MAR.-APR.-2025)
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">14-May-25:</span> 681-M.Sc. IN MICROBIOLOGY (FIRST SEMESTER) (DEC.-2024)
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">14-May-25:</span> 683-M.Sc. IN MICROBIOLOGY (THIRD SEMESTER) (DEC.-2024)
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">10-May-25:</span> 733-M.Sc. IN BIOTECHNOLOGY (THIRD SEMESTER) (DEC.-2024)
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">08-May-25:</span> N011-B.Sc. FIRST SEMESTER (MATHS GROUP) (DEC.-2024)
+                        </li>
+                    </ul>
+                    <div class="mt-6 text-right">
+                        <a href="#" class="inline-flex items-center text-light-accent hover:text-light-accent-dark dark:text-dark-accent dark:hover:text-dark-accent-dark font-medium transition-colors duration-200">
+                            View All Results
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-lg shadow-md
+                            bg-light-bg-secondary border border-light-border
+                            dark:bg-dark-bg-secondary dark:border-dark-border">
+                    <h3 class="text-xl font-semibold mb-4 text-light-accent dark:text-dark-accent">
+                        Shaheed Nandkumar Patel Vishwavidyalaya, Raigarh
+                    </h3>
+                    <ul class="space-y-3 text-light-text-secondary dark:text-dark-text-secondary">
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> Retotaling Result 301 P.G.DIPLOMA IN YOGA SCIENCE I SEM. (DEC.-2024)
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> UFM TO DECLARE RESULT N001-B.A. FIRST SEMESTER (DEC.-2024)
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> UFM TO DECLARE RESULT N011-B.Sc. FIRST SEMESTER (MATHS GROUP) (DEC.-2024)
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> UFM TO DECLARE RESULT N041-B.COM. FIRST SEMESTER (DEC.-2024)
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> UFM TO DECLARE RESULT 9010-LL.B. PART ONE (I SEM.){...}
+                        </li>
+                        <li>
+                            <span class="font-medium text-light-text-primary dark:text-dark-text-primary">10-May-25:</span> 1003-B.A. L.L.B. (III SEM.) (NEW COURSE) (JAN.-FEB.-2025)
+                        </li>
+                    </ul>
+                    <div class="mt-6 text-right">
+                        <a href="#" class="inline-flex items-center text-light-accent hover:text-light-accent-dark dark:text-dark-accent dark:hover:text-dark-accent-dark font-medium transition-colors duration-200">
+                            View All Results
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12">
+            <h2 class="text-3xl font-bold text-center mb-8
+                       text-light-text-primary dark:text-dark-text-primary">
+                Quick Links
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <a href="#" class="flex flex-col items-center p-6 rounded-lg shadow-md
+                                   bg-light-bg-secondary border border-light-border
+                                   dark:bg-dark-bg-secondary dark:border-dark-border
+                                   hover:shadow-lg hover:border-light-accent dark:hover:border-dark-accent
+                                   transition-all duration-300 transform hover:-translate-y-1">
+                    <svg class="w-12 h-12 mb-3 text-light-accent dark:text-dark-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    <span class="text-lg font-medium text-light-text-primary dark:text-dark-text-primary">Browse Universities</span>
+                    <p class="text-sm text-light-text-secondary dark:text-dark-text-secondary text-center mt-1">Access results from India's top universities</p>
+                </a>
+                <a href="#" class="flex flex-col items-center p-6 rounded-lg shadow-md
+                                   bg-light-bg-secondary border border-light-border
+                                   dark:bg-dark-bg-secondary dark:border-dark-border
+                                   hover:shadow-lg hover:border-light-accent dark:hover:border-dark-accent
+                                   transition-all duration-300 transform hover:-translate-y-1">
+                    <svg class="w-12 h-12 mb-3 text-light-accent dark:text-dark-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span class="text-lg font-medium text-light-text-primary dark:text-dark-text-primary">Latest Results</span>
+                    <p class="text-sm text-light-text-secondary dark:text-dark-text-secondary text-center mt-1">Check the most recently declared results</p>
+                </a>
+                <a href="#" class="flex flex-col items-center p-6 rounded-lg shadow-md
+                                   bg-light-bg-secondary border border-light-border
+                                   dark:bg-dark-bg-secondary dark:border-dark-border
+                                   hover:shadow-lg hover:border-light-accent dark:hover:border-dark-accent
+                                   transition-all duration-300 transform hover:-translate-y-1">
+                    <svg class="w-12 h-12 mb-3 text-light-accent dark:text-dark-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 21h7a2 2 0 002-2V9a2 2 0 00-2-2h-7a2 2 0 00-2 2v10a2 2 0 002 2zM9 3L4 8"></path></svg>
+                    <span class="text-lg font-medium text-light-text-primary dark:text-dark-text-primary">Advanced Search</span>
+                    <p class="text-sm text-light-text-secondary dark:text-dark-text-secondary text-center mt-1">Find results with advanced filters</p>
+                </a>
+                <a href="#" class="flex flex-col items-center p-6 rounded-lg shadow-md
+                                   bg-light-bg-secondary border border-light-border
+                                   dark:bg-dark-bg-secondary dark:border-dark-border
+                                   hover:shadow-lg hover:border-light-accent dark:hover:border-dark-accent
+                                   transition-all duration-300 transform hover:-translate-y-1">
+                    <svg class="w-12 h-12 mb-3 text-light-accent dark:text-dark-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.228 9.247a8.5 8.5 0 0110.158 1.488l1.378 1.378a2.5 2.5 0 010 3.536l-1.378 1.378c-.732.732-1.708 1.098-2.652.793a8.503 8.503 0 01-11.83-8.318L8.228 9.247zm1.745 1.745a3.5 3.5 0 00-4.95 4.95m7.07-7.07a3.5 3.5 0 00-4.95 4.95"></path></svg>
+                    <span class="text-lg font-medium text-light-text-primary dark:text-dark-text-primary">How It Works</span>
+                    <p class="text-sm text-light-text-secondary dark:text-dark-text-secondary text-center mt-1">Learn how to use OnlineResult.in</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="py-12">
+            <h2 class="text-3xl font-bold text-center mb-8
+                       text-light-text-primary dark:text-dark-text-primary">
+                Recent Updates
+            </h2>
+            <div class="max-w-3xl mx-auto p-6 rounded-lg shadow-md
+                        bg-light-bg-secondary border border-light-border
+                        dark:bg-dark-bg-secondary dark:border-dark-border">
+                <ul class="space-y-3 text-light-text-secondary dark:text-dark-text-secondary">
+                    <li>
+                        <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> <span class="font-semibold">Shaheed Nandkumar Patel Vishwavidyalaya, Raigarh</span> - Retotaling Result 301 P.G.DIPLOMA IN YOGA SCIENCE I SEM. (DEC.-2024)
+                    </li>
+                    <li>
+                        <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> <span class="font-semibold">Shaheed Nandkumar Patel Vishwavidyalaya, Raigarh</span> - UFM TO DECLARE RESULT N001-B.A. FIRST SEMESTER (DEC.-2024)
+                    </li>
+                    <li>
+                        <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> <span class="font-semibold">Shaheed Nandkumar Patel Vishwavidyalaya, Raigarh</span> - UFM TO DECLARE RESULT N011-B.Sc. FIRST SEMESTER (MATHS GROUP) (DEC.-2024)
+                    </li>
+                    <li>
+                        <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> <span class="font-semibold">Shaheed Nandkumar Patel Vishwavidyalaya, Raigarh</span> - UFM TO DECLARE RESULT N041-B.COM. FIRST SEMESTER (DEC.-2024)
+                    </li>
+                    <li>
+                        <span class="font-medium text-light-text-primary dark:text-dark-text-primary">16-May-25:</span> <span class="font-semibold">Shaheed Nandkumar Patel Vishwavidyalaya, Raigarh</span> - UFM TO DECLARE RESULT 9010-LL.B. PART ONE (I SEM.) (NEW COURSE) (JAN.-FEB.-2025)
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full py-8 px-6 md:px-8 lg:px-12
+                   bg-light-bg-secondary shadow-inner
+                   dark:bg-dark-bg-secondary
+                   text-light-text-secondary dark:text-dark-text-secondary">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+            <div>
+                <h4 class="text-lg font-semibold mb-3 text-light-text-primary dark:text-dark-text-primary">OnlineResult</h4>
+                <p class="text-sm">Your trusted platform for accessing university results across India.</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-3 text-light-text-primary dark:text-dark-text-primary">Quick Links</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-light-accent dark:hover:text-dark-accent transition-colors">How It Works</a></li>
+                    <li><a href="#" class="hover:text-light-accent dark:hover:text-dark-accent transition-colors">About Us</a></li>
+                    <li><a href="#" class="hover:text-light-accent dark:hover:text-dark-accent transition-colors">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-3 text-light-text-primary dark:text-dark-text-primary">Popular Universities</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-light-accent dark:hover:text-dark-accent transition-colors">Raigarh University</a></li>
+                    <li><a href="#" class="hover:text-light-accent dark:hover:text-dark-accent transition-colors">Bilaspur University</a></li>
+                    <li><a href="#" class="hover:text-light-accent dark:hover:text-dark-accent transition-colors">SARGUJA University</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-3 text-light-text-primary dark:text-dark-text-primary">Legal</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-light-accent dark:hover:text-dark-accent transition-colors">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-light-accent dark:hover:text-dark-accent transition-colors">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-light-accent dark:hover:text-dark-accent transition-colors">Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center text-sm mt-8 pt-6 border-t border-light-border dark:border-dark-border">
+            <p>&copy; 2025 OnlineResult.in. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const htmlElement = document.documentElement; // This refers to the <html> tag
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+
+            // Function to set the theme
+            const setTheme = (theme) => {
+                if (theme === 'dark') {
+                    htmlElement.classList.add('dark');
+                    htmlElement.classList.remove('light');
+                    sunIcon.classList.add('hidden');
+                    moonIcon.classList.remove('hidden');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    htmlElement.classList.remove('dark');
+                    htmlElement.classList.add('light');
+                    sunIcon.classList.remove('hidden');
+                    moonIcon.classList.add('hidden');
+                    localStorage.setItem('theme', 'light');
+                }
+            };
+
+            // Check for saved theme preference or default to light mode
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                // If no saved theme, check system preference
+                setTheme('dark');
+            } else {
+                setTheme('light'); // Default to light if no preference found
+            }
+
+            // Toggle theme on button click
+            darkModeToggle.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    setTheme('light');
+                } else {
+                    setTheme('dark');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
