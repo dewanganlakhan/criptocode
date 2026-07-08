@@ -1,82 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" class="dark"> <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criptocode IT Solutions</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        :root {
-            /* Dark Mode Colors */
-            --color-primary-bg: #111827; /* gray-900 */
-            --color-secondary-bg: #1F2937; /* gray-800 */
-            --color-card-bg: #374151; /* gray-700 */
-            --color-text-primary: #F3F4F6; /* gray-100 */
-            --color-text-secondary: #D1D5DB; /* gray-300 */
-            --color-text-muted: #9CA3AF; /* gray-400 */
-            --color-accent: #00C6FF; /* cyan-400/600 */
-            --color-accent-hover: #00A0D0; /* darker cyan */
-            --color-accent-light: #B39FFF; /* muted violet */
-            --color-border: #4B5563; /* gray-600 */
-            --color-shadow: rgba(0, 0, 0, 0.5); /* Darker shadow */
-            --color-gradient-from: #111827;
-            --color-gradient-to: #1F2937;
-        }
+---
+import Layout from '../layouts/Layout.astro';
+---
 
-        html.light {
-            /* Light Mode Colors */
-            --color-primary-bg: #F9FAFB; /* gray-50 */
-            --color-secondary-bg: #F3F4F6; /* gray-100 */
-            --color-card-bg: #FFFFFF; /* white */
-            --color-text-primary: #1F2937; /* gray-900 */
-            --color-text-secondary: #374151; /* gray-700 */
-            --color-text-muted: #6B7280; /* gray-500 */
-            --color-accent: #008CFF; /* slightly darker blue for contrast */
-            --color-accent-hover: #006ED0; /* darker blue */
-            --color-accent-light: #8B5CF6; /* slightly darker violet for contrast */
-            --color-border: #D1D5DB; /* gray-300 */
-            --color-shadow: rgba(0, 0, 0, 0.1); /* Lighter shadow */
-            --color-gradient-from: #F9FAFB;
-            --color-gradient-to: #F3F4F6;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-            background-color: var(--color-primary-bg); /* Use variable */
-            color: var(--color-text-primary); /* Use variable */
-            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
-        }
-
-        /* Custom scrollbar for a minimalistic look */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--color-secondary-bg); /* Use variable */
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--color-accent); /* Use variable */
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--color-accent-hover); /* Use variable */
-        }
-
-        /* Adjusting hero section gradient to use variables */
-        #hero {
-            background: linear-gradient(to bottom right, var(--color-gradient-from), var(--color-gradient-to));
-        }
-        #hero .opacity-20 circle {
-            /* These colors are already defined in SVG defs, but if they were direct, they'd use vars */
-            /* The SVG defs use gradient1 and gradient2, which are defined with stop-color.
-               I need to make sure these stop-colors use the variables. */
-        }
-    </style>
-</head>
-<body class="antialiased">
-
+<Layout title="Criptocode IT Solutions" description="We are an IT firm dedicated to crafting innovative AI and modern technology solutions that redefine possibilities.">
     <header class="bg-[var(--color-secondary-bg)] bg-opacity-90 sticky top-0 z-50 shadow-lg transition-colors duration-300">
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
             <a href="#hero" class="flex flex-col items-start group">
@@ -95,11 +21,11 @@
             </div>
 
             <ul class="hidden md:flex items-center space-x-8">
-                <li><a href="#hero" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium">Home</a></li>
-                <li><a href="#about" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium">About Us</a></li>
-                <li><a href="#services" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium">Services</a></li>
-                <li><a href="#team" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium">Team</a></li>
-                <li><a href="#contact" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium">Contact</a></li>
+                <li><a href="#hero" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium font-inter">Home</a></li>
+                <li><a href="#about" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium font-inter">About Us</a></li>
+                <li><a href="#services" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium font-inter">Services</a></li>
+                <li><a href="#team" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium font-inter">Team</a></li>
+                <li><a href="#contact" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium font-inter">Contact</a></li>
                 <li>
                     <button id="theme-toggle-desktop" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] focus:outline-none focus:text-[var(--color-accent)] text-xl">
                         <i class="fas fa-moon"></i> </button>
@@ -111,7 +37,7 @@
             <ul class="flex flex-col items-center space-y-4">
                 <li><a href="#hero" class="block text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium py-2">Home</a></li>
                 <li><a href="#about" class="block text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium py-2">About Us</a></li>
-                <li><a href="#services" class="block text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium py-2">Services</a></li>
+                <li><a href="#services" class="block text-[var(--color-text-secondary)] hover:text(--color-accent)] transition duration-300 font-medium py-2">Services</a></li>
                 <li><a href="#team" class="block text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium py-2">Team</a></li>
                 <li><a href="#contact" class="block text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition duration-300 font-medium py-2">Contact</a></li>
             </ul>
@@ -248,7 +174,7 @@
     <section id="team" class="py-20 bg-[var(--color-primary-bg)] transition-colors duration-300">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center text-[var(--color-text-primary)] mb-12 animate-fade-in-up">Meet Our Team</h2>
-            <p class="text-lg text-[var(--color-text-secondary)] text-center mb-10 max-w-2xl mx-auto animate-fade-in-up delay-100">
+            <p class="text-lg text-[var(--color-text-secondary)] text-center mb-10 max-w-2xl mx-auto animate-fade-in-up delay-100 font-inter">
                 Our diverse team of innovators, engineers, and strategists are the driving force behind our success. We bring together a wealth of expertise and a shared passion for technology.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
@@ -339,9 +265,6 @@
                         </button>
                     </div>
                 </form>
-                <!-- <p class="text-[var(--color-text-muted)] text-sm text-center mt-6">
-                    <strong class="text-red-400">Important:</strong> For the form to work on GitHub Pages, you'll need a service like <a href="https://formspree.io/" target="_blank" class="text-[var(--color-accent)] hover:underline">Formspree.io</a> or <a href="https://www.netlify.com/products/forms/" target="_blank" class="text-[var(--color-accent)] hover:underline">Netlify Forms</a>. Replace `YOUR_FORMSPREE_OR_NETLIFY_FORM_ENDPOINT` with your actual form endpoint.
-                </p> -->
             </div>
         </div>
     </section>
@@ -362,44 +285,52 @@
             <p class="text-sm mt-2">Built with passion, powered by innovation.</p>
         </div>
     </footer>
+</Layout>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                // Close mobile menu after clicking a link
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
+<script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            if (href) {
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 }
-            });
+            }
+            // Close mobile menu after clicking a link
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
         });
+    });
 
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
 
+    if (mobileMenuButton && mobileMenu) {
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
+    }
 
-        // Theme Toggle Logic
-        const htmlElement = document.documentElement; // Represents the <html> tag
-        const themeToggleButtons = document.querySelectorAll('#theme-toggle, #theme-toggle-desktop'); // Both mobile and desktop buttons
+    // Theme Toggle Logic
+    const htmlElement = document.documentElement;
+    const themeToggleButtons = document.querySelectorAll('#theme-toggle, #theme-toggle-desktop');
 
-        // Function to apply the theme
-        function applyTheme(theme) {
-            htmlElement.classList.remove('dark', 'light');
-            htmlElement.classList.add(theme);
-            localStorage.setItem('theme', theme); // Store preference
+    function applyTheme(theme: string) {
+        htmlElement.classList.remove('dark', 'light');
+        htmlElement.classList.add(theme);
+        localStorage.setItem('theme', theme);
 
-            // Update button icons
-            themeToggleButtons.forEach(button => {
-                const icon = button.querySelector('i');
+        themeToggleButtons.forEach(button => {
+            const icon = button.querySelector('i');
+            if (icon) {
                 if (theme === 'dark') {
                     icon.classList.remove('fa-sun');
                     icon.classList.add('fa-moon');
@@ -407,122 +338,116 @@
                     icon.classList.remove('fa-moon');
                     icon.classList.add('fa-sun');
                 }
-            });
+            }
+        });
+    }
+
+    // Check for saved theme preference on page load
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    } else if (prefersDark) {
+        applyTheme('dark');
+    } else {
+        applyTheme('light');
+    }
+
+    // Add event listeners to theme toggle buttons
+    themeToggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
+    });
+
+    // Simple Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fade-in-active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-fade-in-up, .animate-fade-in-left, .animate-fade-in-right').forEach(element => {
+        const el = element as HTMLElement;
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        if (el.classList.contains('animate-fade-in-left')) {
+            el.style.transform = 'translateX(-20px)';
         }
+        if (el.classList.contains('animate-fade-in-right')) {
+            el.style.transform = 'translateX(20px)';
+        }
+        observer.observe(el);
+    });
+</script>
 
-        // Check for saved theme preference on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+<style is:global>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    @keyframes fadeInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    @keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    @keyframes pulseSlow {
+        0%, 100% { transform: scale(1); opacity: 0.2; }
+        50% { transform: scale(1.1); opacity: 0.4; }
+    }
+    @keyframes pulseMedium {
+        0%, 100% { transform: scale(1); opacity: 0.25; }
+        50% { transform: scale(1.15); opacity: 0.5; }
+    }
+    @keyframes pulseFast {
+        0%, 100% { transform: scale(1); opacity: 0.3; }
+        50% { transform: scale(1.2); opacity: 0.6; }
+    }
 
-            if (savedTheme) {
-                applyTheme(savedTheme);
-            } else if (prefersDark) {
-                applyTheme('dark'); // Default to dark if system prefers dark
-            } else {
-                applyTheme('light'); // Default to light if no preference and system doesn't prefer dark
-            }
-        });
+    .animate-fade-in-up.animate-fade-in-active {
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+    .animate-fade-in-left.animate-fade-in-active {
+        animation: fadeInLeft 0.8s ease-out forwards;
+    }
+    .animate-fade-in-right.animate-fade-in-active {
+        animation: fadeInRight 0.8s ease-out forwards;
+    }
+    .animate-fade-in-up.delay-100.animate-fade-in-active { animation-delay: 0.1s; }
+    .animate-fade-in-up.delay-200.animate-fade-in-active { animation-delay: 0.2s; }
+    .animate-fade-in-up.delay-300.animate-fade-in-active { animation-delay: 0.3s; }
+    .animate-fade-in-up.delay-400.animate-fade-in-active { animation-delay: 0.4s; }
+    .animate-fade-in-up.delay-500.animate-fade-in-active { animation-delay: 0.5s; }
+    .animate-fade-in-up.delay-600.animate-fade-in-active { animation-delay: 0.6s; }
 
-        // Add event listeners to theme toggle buttons
-        themeToggleButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                applyTheme(newTheme);
-            });
-        });
-
-        // Simple Intersection Observer for fade-in animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in-active');
-                    observer.unobserve(entry.target); // Stop observing once animated
-                }
-            });
-        }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
-
-        document.querySelectorAll('.animate-fade-in-up, .animate-fade-in-left, .animate-fade-in-right').forEach(element => {
-            // Add initial opacity for smooth fade-in
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)'; /* Default for fade-in-up */
-            if (element.classList.contains('animate-fade-in-left')) {
-                element.style.transform = 'translateX(-20px)';
-            }
-            if (element.classList.contains('animate-fade-in-right')) {
-                element.style.transform = 'translateX(20px)';
-            }
-            observer.observe(element);
-        });
-
-        // Add Tailwind custom animation classes dynamically
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            @keyframes fadeInLeft {
-                from {
-                    opacity: 0;
-                    transform: translateX(-20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
-            }
-            @keyframes fadeInRight {
-                from {
-                    opacity: 0;
-                    transform: translateX(20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
-            }
-            @keyframes pulseSlow {
-                0%, 100% { transform: scale(1); opacity: 0.2; }
-                50% { transform: scale(1.1); opacity: 0.4; }
-            }
-            @keyframes pulseMedium {
-                0%, 100% { transform: scale(1); opacity: 0.25; }
-                50% { transform: scale(1.15); opacity: 0.5; }
-            }
-            @keyframes pulseFast {
-                0%, 100% { transform: scale(1); opacity: 0.3; }
-                50% { transform: scale(1.2); opacity: 0.6; }
-            }
-
-            .animate-fade-in-up.animate-fade-in-active {
-                animation: fadeInUp 0.8s ease-out forwards;
-            }
-            .animate-fade-in-left.animate-fade-in-active {
-                animation: fadeInLeft 0.8s ease-out forwards;
-            }
-            .animate-fade-in-right.animate-fade-in-active {
-                animation: fadeInRight 0.8s ease-out forwards;
-            }
-            .animate-fade-in-up.delay-100.animate-fade-in-active { animation-delay: 0.1s; }
-            .animate-fade-in-up.delay-200.animate-fade-in-active { animation-delay: 0.2s; }
-            .animate-fade-in-up.delay-300.animate-fade-in-active { animation-delay: 0.3s; }
-            .animate-fade-in-up.delay-400.animate-fade-in-active { animation-delay: 0.4s; }
-            .animate-fade-in-up.delay-500.animate-fade-in-active { animation-delay: 0.5s; }
-            .animate-fade-in-up.delay-600.animate-fade-in-active { animation-delay: 0.6s; }
-
-            .animate-pulse-slow { animation: pulseSlow 5s infinite ease-in-out; }
-            .animate-pulse-medium { animation: pulseMedium 4s infinite ease-in-out; }
-            .animate-pulse-fast { animation: pulseFast 3s infinite ease-in-out; }
-        `;
-        document.head.appendChild(style);
-    </script>
-</body>
-</html>
+    .animate-pulse-slow { animation: pulseSlow 5s infinite ease-in-out; }
+    .animate-pulse-medium { animation: pulseMedium 4s infinite ease-in-out; }
+    .animate-pulse-fast { animation: pulseFast 3s infinite ease-in-out; }
+</style>

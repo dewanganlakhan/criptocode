@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --font-inter: "Inter", sans-serif;
+
+  /* Theme variables for result.html custom palette */
+  --color-light-bg-primary: #f8fafc;
+  --color-light-bg-secondary: #ffffff;
+  --color-light-text-primary: #1e293b;
+  --color-light-text-secondary: #475569;
+  --color-light-border: #e2e8f0;
+  --color-light-accent: #3b82f6;
+  --color-light-accent-dark: #2563eb;
+
+  --color-dark-bg-primary: #1a202c;
+  --color-dark-bg-secondary: #2d3748;
+  --color-dark-text-primary: #e2e8f0;
+  --color-dark-text-secondary: #a0aec0;
+  --color-dark-border: #4a5568;
+  --color-dark-accent: #60a5fa;
+  --color-dark-accent-dark: #3b82f6;
+}
+
+/* Custom class-based dark variant in Tailwind v4 */
+@variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Default: Dark Mode Colors for index.html */
+  --color-primary-bg: #111827; /* gray-900 */
+  --color-secondary-bg: #1F2937; /* gray-800 */
+  --color-card-bg: #374151; /* gray-700 */
+  --color-text-primary: #F3F4F6; /* gray-100 */
+  --color-text-secondary: #D1D5DB; /* gray-300 */
+  --color-text-muted: #9CA3AF; /* gray-400 */
+  --color-accent: #00C6FF; /* cyan-400/600 */
+  --color-accent-hover: #00A0D0; /* darker cyan */
+  --color-accent-light: #B39FFF; /* muted violet */
+  --color-border: #4B5563; /* gray-600 */
+  --color-shadow: rgba(0, 0, 0, 0.5); /* Darker shadow */
+  --color-gradient-from: #111827;
+  --color-gradient-to: #1F2937;
+}
+
+html.light {
+  /* Light Mode Colors for index.html */
+  --color-primary-bg: #F9FAFB; /* gray-50 */
+  --color-secondary-bg: #F3F4F6; /* gray-100 */
+  --color-card-bg: #FFFFFF; /* white */
+  --color-text-primary: #1F2937; /* gray-900 */
+  --color-text-secondary: #374151; /* gray-700 */
+  --color-text-muted: #6B7280; /* gray-500 */
+  --color-accent: #008CFF; /* slightly darker blue for contrast */
+  --color-accent-hover: #006ED0; /* darker blue */
+  --color-accent-light: #8B5CF6; /* slightly darker violet for contrast */
+  --color-border: #D1D5DB; /* gray-300 */
+  --color-shadow: rgba(0, 0, 0, 0.1); /* Lighter shadow */
+  --color-gradient-from: #F9FAFB;
+  --color-gradient-to: #F3F4F6;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+  background-color: var(--color-primary-bg);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-secondary-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-hover);
+}
+
+/* Smooth transition for theme changes on other custom styles */
+.bg-light-bg-primary, .bg-light-bg-secondary, .text-light-text-primary, .text-light-text-secondary, .border-light-border, .text-light-accent, .hover\:bg-light-accent-dark {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.dark .bg-dark-bg-primary, .dark .bg-dark-bg-secondary, .dark .text-dark-text-primary, .dark .text-dark-text-secondary, .dark .border-dark-border, .dark .text-dark-accent, .dark .hover\:bg-dark-accent-dark {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Horizontal scrolling university list helpers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
