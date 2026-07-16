@@ -1,0 +1,18 @@
+# Criptocode IT Solutions
+
+We are an IT firm dedicated to crafting innovative AI and modern technology solutions that redefine possibilities.
+
+## Services
+
+- **AI & Machine Learning**: Predictive analytics, natural language processing, and computer vision systems.
+- **Data Science & Analytics**: Comprehensive data analysis, visualization, and big data solutions.
+- **Custom Software Development**: Software solutions for web, mobile, and enterprise needs.
+- **Cloud & DevOps**: Infrastructure optimization, cloud migration, and automation on AWS, Azure, and GCP.
+- **IoT & Edge Computing**: Connected physical devices and smart automation.
+- **Cybersecurity Consulting**: Vulnerability assessments, incident response planning, and digital asset safeguarding.
+
+## Pages
+
+- `/`: Main agency landing page introducing our services, vision, and team.
+- `/cindex`: Developer dashboard / index showing our portfolio, custom frameworks, and services.
+- `/result`: OnlineResult university portal providing fast, reliable, and secure access to university results from across India.

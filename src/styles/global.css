@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-inter: "Inter", sans-serif;
+  --font-inter: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
   /* Theme variables for result.html custom palette */
   --color-light-bg-primary: #f8fafc;
@@ -31,10 +31,11 @@
   --color-card-bg: #374151; /* gray-700 */
   --color-text-primary: #F3F4F6; /* gray-100 */
   --color-text-secondary: #D1D5DB; /* gray-300 */
-  --color-text-muted: #9CA3AF; /* gray-400 */
+  --color-text-muted: #A0AEC0; /* increased contrast from #9CA3AF */
   --color-accent: #00C6FF; /* cyan-400/600 */
   --color-accent-hover: #00A0D0; /* darker cyan */
   --color-accent-light: #B39FFF; /* muted violet */
+  --color-accent-text: #111827; /* Dark text on bright cyan bg */
   --color-border: #4B5563; /* gray-600 */
   --color-shadow: rgba(0, 0, 0, 0.5); /* Darker shadow */
   --color-gradient-from: #111827;
@@ -48,10 +49,11 @@ html.light {
   --color-card-bg: #FFFFFF; /* white */
   --color-text-primary: #1F2937; /* gray-900 */
   --color-text-secondary: #374151; /* gray-700 */
-  --color-text-muted: #6B7280; /* gray-500 */
-  --color-accent: #008CFF; /* slightly darker blue for contrast */
-  --color-accent-hover: #006ED0; /* darker blue */
+  --color-text-muted: #4B5563; /* increased contrast from #6B7280 (meets 4.5:1 ratio) */
+  --color-accent: #006BD6; /* adjusted from #008CFF for WCAG AA with white text */
+  --color-accent-hover: #0059B3; /* adjusted from #006ED0 */
   --color-accent-light: #8B5CF6; /* slightly darker violet for contrast */
+  --color-accent-text: #FFFFFF; /* White text on blue bg */
   --color-border: #D1D5DB; /* gray-300 */
   --color-shadow: rgba(0, 0, 0, 0.1); /* Lighter shadow */
   --color-gradient-from: #F9FAFB;
@@ -59,7 +61,7 @@ html.light {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   scroll-behavior: smooth;
   background-color: var(--color-primary-bg);
   color: var(--color-text-primary);
